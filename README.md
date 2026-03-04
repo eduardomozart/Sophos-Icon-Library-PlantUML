@@ -1,2 +1,56 @@
 # Sophos-PlantUML
 PlantUML sprites generated from [Sophos Public Brand Assets](https://brandfolder.com/sophos/public-brand-assets)
+
+The following projects were used to generate the images available in this repository:
+
+* Inkscape to convert SVG to PNG.
+* ImageMagick to remove background alpha transparency from PNG files.
+* PlantUML to convert white background PNGs to Sprites (.puml files). 
+
+The scripts used to generate the images available in this repository are available in the post "[Instalação do libvisio2svg no macOS](https://eduardomozartdeoliveira.wordpress.com/2023/01/30/instalacao-do-libvisio2svg-no-macos/)" (in Portuguese).
+
+## Getting Started
+
+### Webserver Protection
+
+![Basic usage - Webserver Protection](https://www.plantuml.com/plantuml/proxy?idx=0&src=https%3A%2F%2Fraw.githubusercontent.com%2Feduardomozart%2FSophos-PlantUML%2Fmain%2FSamples%2FWebserver_Protection.puml)
+
+```csharp
+@startuml
+!theme aws-orange
+scale 1/3
+' skinparam linetype ortho
+skinparam defaultFontName Helvetica
+' left to right direction
+
+!define SophosIcons https://raw.githubusercontent.com/eduardomozart/Sophos-PlantUML/main/Sophos_-_Security_Solutions_for_Modern_Enterprises/alpha
+
+hide stereotype
+
+skinparam {
+    ArrowColor Black
+    DefaultTextAlignment center
+    BackgroundColor White
+    shadowing false
+    RoundCorner 10
+    dpi 300
+}
+
+skinparam rectangle {
+    BackgroundColor transparent
+    BorderColor transparent
+}
+
+rectangle "<img:SophosIcons/Notebook.png>\nRequisição HTTP/s do\ncliente Web" as WKS
+rectangle "<img:SophosIcons/Globe.png{scale=0.60}>\nInternet" as INTERNET
+rectangle "<img:SophosIcons/UTM_FW.png>\nSophos XG Firewall" as WAF
+note top : IP Público: 202.134.168.208
+rectangle "<img:SophosIcons/Server.png>\nServidor\nWeb" as WEB_SERVER
+note bottom: IP Privado: 172.16.16.10
+
+WKS -right-> INTERNET
+INTERNET -right-> WAF
+WAF -right-> WEB_SERVER
+@enduml
+```
+
